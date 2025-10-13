@@ -84,5 +84,4 @@ export const products = [
       'Tracking: 6 DoF',
     ],
   },
-  // ... you can add the rest of the products here
 ];

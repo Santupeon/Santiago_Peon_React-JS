@@ -10,21 +10,18 @@ import ProtectedRoute from './ProtectedRoute';
 import CheckoutPage from './pages/CheckoutPage';
 
 function App() {
-  // State for the shopping cart
+
   const [cart, setCart] = useState([]);
-  // State for the products, loading status, and errors
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch products when the component mounts
+
   useEffect(() => {
-    // Simulate fetching data from an API
     const fetchProducts = () => {
       setLoading(true);
       setError(null);
-      // Simulate a 1-second network delay
       setTimeout(() => {
         try {
           setProducts(mockProducts);
@@ -37,27 +34,24 @@ function App() {
     };
 
     fetchProducts();
-  }, []); // The empty array [] means this effect runs only once
+  }, []); 
 
-  // Function to add a product to the cart
+
   const handleAddToCart = (product) => {
-    // Check if the product is already in the cart
     const existingProduct = cart.find(item => item.id === product.id);
 
     if (existingProduct) {
-      // If it exists, update the quantity
       setCart(cart.map(item => 
         item.id === product.id 
           ? { ...item, quantity: item.quantity + 1 } 
           : item
       ));
     } else {
-      // If it's a new product, add it with quantity 1
       setCart([...cart, { ...product, quantity: 1 }]);
     }
   };
 
-  // Function to remove a product from the cart
+
   const handleRemoveFromCart = (productId) => {
     setCart(cart.filter(item => item.id !== productId));
   };

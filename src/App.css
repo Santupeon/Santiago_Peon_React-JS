@@ -1,8 +1,7 @@
 /* App.css */
 
 /* -------------------- */
-/* --- GLOBAL STYLES -- */
-/* -------------------- */
+
 :root {
   --primary-color: #ff5bf7;
   --background-color: #2B1744;
@@ -20,7 +19,7 @@ body {
   background-attachment: fixed;
   background-position: center 100px;
   background-size: cover;
-  padding-top: 100px; /* To offset the fixed nav */
+  padding-top: 100px; 
   color: var(--text-color-light);
 }
 
@@ -39,8 +38,7 @@ h1, h2, h3 {
 }
 
 /* -------------------- */
-/* ------ LAYOUT ------ */
-/* -------------------- */
+
 header {
   position: fixed;
   top: 0;
@@ -74,8 +72,7 @@ header nav {
 }
 
 /* -------------------- */
-/* --- PRODUCT LIST --- */
-/* -------------------- */
+
 .container-items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -148,8 +145,7 @@ header nav {
 }
 
 /* -------------------- */
-/* -------- CART -------- */
-/* -------------------- */
+
 .cart-container {
   background-color: #c0a1ff;
   color: var(--text-color-dark);
@@ -195,8 +191,7 @@ header nav {
 }
 
 /* -------------------- */
-/* -- PRODUCT DETAIL -- */
-/* -------------------- */
+
 .product-detail {
   display: flex;
   flex-direction: column;
@@ -218,7 +213,7 @@ header nav {
   padding: 0;
 }
 
-/* Login/Logout Button */
+/* -------------------- */
 header button {
   padding: 0.6em 1.2em;
   font-family: "Orbitron", sans-serif;

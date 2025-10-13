@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-// Helper function to format price
+
 const formatPrice = (price) => {
   return new Intl.NumberFormat('es-AR', {
     style: 'currency',

@@ -2,7 +2,7 @@ import React from 'react';
 import { formatPrice } from '../utils/formatters';
 
 function Cart({ cartItems, onRemoveFromCart }) {
-  // Calculate the total price, now including quantity
+
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -13,7 +13,7 @@ function Cart({ cartItems, onRemoveFromCart }) {
       ) : (
         <>
           {cartItems.map((item) => (
-            // Use the stable product ID as the key
+            
             <div key={item.id} className="cart-item">
               <span>{item.quantity}x {item.name}</span>
               <span>{formatPrice(item.price * item.quantity)}</span>

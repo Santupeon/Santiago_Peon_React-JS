@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/formatters';
 
-// This component receives a single `product` object as a prop
+
 function ProductCard({ product, onAddToCart }) {
 
   return (
@@ -15,7 +15,7 @@ function ProductCard({ product, onAddToCart }) {
       <div className="info-product">
         <Link to={`/products/${product.id}`}><h2>{product.name}</h2></Link>
         <p className="price">{formatPrice(product.price)}</p>        
-        {/* We will add the features list and button later */}
+        {/* agregar lista de caracteristicas despues*/}
         <button
           className="btn-add-cart"
           onClick={() => onAddToCart(product)}
