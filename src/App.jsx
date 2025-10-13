@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 import Cart from './components/Cart'
-import { products as mockProducts } from './data/products.js'; // Import mock data
+import { products as mockProducts } from './data/products.js'; 
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
