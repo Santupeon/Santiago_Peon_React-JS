@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # Project-specific folders
-/references
+/src/references
 /public/video
