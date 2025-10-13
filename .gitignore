@@ -36,5 +36,5 @@ lerna-debug.log*
 *.sw?
 
 # Project-specific folders
-/references
-/public/videos
+/src/references
+/public/video
