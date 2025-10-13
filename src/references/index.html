@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link rel="icon" href="image/favicon.ico">
+    <title>PawnVR "productos de realidad virtual para uso personal"</title>
+    <script src="https://kit.fontawesome.com/8756d311b7.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <a></a>
+        <ul class="navegador">
+            <li><a href="#inicio"><img src="image/inicio.png"></a></li>
+            <li><a href="#productos"><img src="image/productos.png"></a></li>
+            <li><a href="#servicios"><img src="image/servicios.png"></a></li>
+            <li><a href="#contacto"><img src="image/contacto.png"></a></li>
+        </ul>    
+            <carrito id="carrito">
+                <div class="iconos">
+
+                    <i class="fa-solid fa-cart-shopping fa-3x icon-cart"></i> 
+                        <ul id="lista-carrito"></ul>
+                    
+                
+                    <div class="cuenta-productos">
+                        <span id="contador-productos">0</span>
+                    </div>
+                    
+                </div>
+                <div class="contenedor-productos-carrito hidden-carrito">
+
+                    <div class="renglon-carrito">
+
+                        
+                    </div>
+
+                    <div class="carrito-total">
+
+                        <h3>Total:</h3>
+                        <span class="total-pagar">$0</span>
+
+                    </div>
+                </div>
+
+            </carrito> 
+        
+
+        
+
+        
+
+    </nav>
+
+    <header id="inicio">
+    
+        <h1><strong>Vive el Futuro:</strong></h1>
+        <h2>Realidad Virtual al Alcance de Todos</h2>
+        <h3>Explora nuevas dimensiones con nuestra selección de productos VR para uso personal. </h3>
+        <h3 id="h3-2">¡Sumérgete en experiencias únicas y transforma tu manera de jugar, aprender y vivir!</h4>
+
+        <video width="570"  autoplay controls muted>
+            <source src="video/BeatSaber.mp4" type="video/mp4"  alt="clip jugando al Beat Saber en VR">
+            <track src="video/subtitulos.vtt" kind="subtitles" srclang="es" label="Español">
+            Tu navegador no soporta la reproducción de video.
+        </video>
+
+    </header>
+   
+    <main>
+
+    <div class="productos" id="productos">
+
+        <div class="item" id="Samsung Gear VR">
+
+            <fig href=""><img src="image/productos/gear vr.webp" alt="Gear VR"></fig>
+
+            <div class="descripcion">
+
+                <strong> Samsung Gear VR</strong>
+
+                
+                    <ul>
+                        <li><a> Necesita smartphone Samsung(S6 o mejor) </a></li>
+                        <li><a> FoV: 96° </a></li>
+                        <li><a> Tracking: 3 DoF</a></li>
+                        <li><a> Peso: 318g </a></li>
+                        
+                    </ul>                  
+                
+                <div class="precio">
+
+                    <h2 hidden>Samsung Gear VR</h2>
+
+                    <h1>$150000</h1>
+
+                    <button id="bt1" class="agregar-carrito" data-id="1"
+                    data-nombre="Samsung Gear VR" data-precio="150000">
+                    Agregar al Carrito</button>
+
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <div class="item" id="Oculus GO">
+
+            <fig href=""><img src="image/productos/oculus go.jpg" alt="Oculus GO"></fig>
+
+            <div class="descripcion">
+
+                <strong> Oculus GO</strong>
+
+                
+                    <ul>
+                        <li><a >Resolucion por ojo: 1280x1440 60Hz</a></li>
+                        <li><a >FoV: 89°</a></li>
+                        <li><a >Almacenamiento: 32 GB/ 64 GB</a></li>
+                        <li><a >Tracking: 3 DoF</a></li>
+                        <li><a >Peso: 468g</a></li>
+                        <li><a >Ram: 3 GB</a></li>
+                        <li><a >Chip: Qualcomm Snapdragon 821</a></li>
+                        <li><a >CPU: Quad-core Kryo</a></li>
+                        <li><a >GPU: Adreno 530</a></li>
+                    </ul>
+                              
+                <div class="precio">
+                    
+                    <h2 hidden>Oculus GO</h2>
+
+                    <h1>$250000</h1>
+
+                    <button id="bt2" class="agregar-carrito" data-id="2"
+                    data-nombre="Oculus GO" data-precio="250000">
+                    Agregar al Carrito</button>
+
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <div class="item" id="Oculus Quest">
+            <fig href=""><img src="image/productos/oculus quest.jpg" alt="Oculus Quest"></fig>
+            <div class="descripcion">
+
+                <strong> Oculus Quest</strong>
+
+                
+                    <ul id="bt3">
+                        <li><a >Resolucion por ojo: 1440x1600 72Hz</a></li>
+                        <li><a >FoV: 93°</a></li>
+                        <li><a >Almacenamiento: 64 GB/ 128 GB</a></li>   
+                        <li><a >Ram: 4 GB</a></li>
+                        <li><a >Chip: Qualcomm Snapdragon 835</a></li>
+                        <li><a >CPU: Octa-core Kryo 280</a></li>
+                        <li><a >GPU: Adreno 540</a></li>
+                    </ul>
+
+                <div class="precio">
+
+                    <h2 hidden>Oculus Quest</h2> 
+
+                    <h1>$350000</h1>
+
+                    <button id="bt3" class="agregar-carrito" data-id="3"
+                    data-nombre="Oculus Quest" data-precio="350000">
+                    Agregar al Carrito</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="item" id="Meta Quest 2">
+            <fig href=""><img src="image/productos/meta quest 2.png" alt="Oculus Quest 2"></fig>
+            <div class="descripcion">
+
+                <strong> Meta Quest 2</strong>
+
+                
+                    <ul>
+                        <li><a >Resolucion por ojo: 1832x1920 120Hz</a></li>
+                        <li><a >FoV: 97°</a></li>
+                        <li><a >Almacenamiento: 64 GB/ 128 GB/ 256 GB</a></li>
+                        <li><a >Tracking: 6 DoF</a></li>
+                        <li><a >Peso: 503 g</a></li>
+                        <li><a >Ram: 6 GB</a></li>
+                        <li><a >Chip: Qualcomm Snapdragon XR2</a></li>
+                        <li><a >CPU: Octa-core Kryo 585</a></li>
+                        <li><a >GPU: Adreno 650</a></li>
+                    </ul>
+
+
+                <div class="precio">
+
+                    <h2 hidden>Meta Quest 2</h2>
+
+                    <h1>$750000</h1>
+
+                    <button id="bt4" class="agregar-carrito" data-id="4"
+                    data-nombre="Meta Quest 2" data-precio="750000">
+                    Agregar al Carrito</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="item" id="Meta Quest PRO">
+            <fig href=""><img src="image/productos/meta quest pro.jpg" alt="Oculus Quest PRO"></fig>
+            <div class="descripcion">
+
+                <strong>  Meta Quest PRO</strong>
+
+                
+                    <ul>
+                        <li><a >Resolucion por ojo: 1800x1920 90Hz</a></li>
+                        <li><a >FoV: 106°</a></li>
+                        <li><a >Almacenamiento: 256 GB</a></li>
+                        <li><a >Ram: 12 GB LPDDR5</a></li>
+                        <li><a >Chip: Qualcomm Snapdragon XR2+</a></li>
+                        <li><a >CPU: Octa-core Kryo 585</a></li>
+                        <li><a >GPU: Adreno 650</a></li>
+                        
+                    </ul>
+
+
+                <div class="precio">
+
+                    <h2 hidden>Meta Quest PRO</h2>
+
+                    <h1>$1000000</h1>
+
+                    <button id="bt5" class="agregar-carrito" data-id="5"
+                    data-nombre="Meta Quest PRO" data-precio="1000000">
+                    Agregar al Carrito</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="item" id="Meta Quest 3s">
+            <fig href=""><img src="image/productos/meta quest 3s.webp" alt="Oculus Quest 3s"></fig>
+            <div class="descripcion">
+
+                <strong>  Meta Quest 3s</strong>
+
+                
+                    <ul>
+                        <li><a >Resolucion por ojo: 1832x1920 120Hz</a></li>
+                        <li><a >FoV: 97°</a></li>
+                        <li><a >Almacenamiento: 128 GB/ 256 GB</a></li>
+                        <li><a >Tracking: 6 DoF</a></li>
+                        <li><a >Peso: 514 g</a></li>
+                        <li><a >Ram: 8 GB</a></li>
+                        <li><a >Chip: Qualcomm Snapdragon XR2 Gen 2</a></li>
+                        <li><a >CPU: Octa-core Kryo</a></li>
+                        <li><a >GPU: Adreno 740</a></li>
+                    </ul>
+
+
+                <div class="precio">
+
+                    <h2 hidden>Meta Quest 3s</h2>
+
+                    <h1>$1500000</h1>
+
+                    <button id="bt6" class="agregar-carrito" data-id="6"
+                    data-nombre="Meta Quest 3s" data-precio="1500000">
+                    Agregar al Carrito</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="item" id="Meta Quest 3">
+            <fig href=""><img src="image/productos/meta quest 3.webp" alt="Meta Quest 3"></fig>
+            <div class="descripcion">
+
+                <strong>  Meta Quest 3</strong>
+
+                
+                    <ul>
+                        <li><a >Resolucion por ojo: 2064x2208 120Hz</a></li>
+                        <li><a >FoV: 110°</a></li>
+                        <li><a >Almacenamiento: 128 GB/ 256 GB / 512 GB</a></li>
+                        <li><a >Tracking: 6 DoF</a></li>
+                        <li><a >Peso: 515 g</a></li>
+                        <li><a >Ram: 8 GB</a></li>
+                        <li><a >Chip: Qualcomm Snapdragon XR2 Gen 2</a></li>
+                        <li><a >CPU: Octa-core Kryo</a></li>
+                        <li><a >GPU: Adreno 740</a></li>
+                    </ul>
+
+                <div class="precio">
+
+                    <h2 hidden>Meta Quest 3</h2>
+
+                    <h1>$1850000</h1>
+
+                    <button id="bt7" class="agregar-carrito" data-id="7"
+                    data-nombre="Meta Quest 3" data-precio="1850000">
+                    Agregar al Carrito</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="item" id="Playstation VR 2">
+            <fig href=""><img src="image/productos/psvr2.webp" alt="Playstation VR 2"></fig>
+            <div class="descripcion">
+
+                <strong> Playstation VR 2</strong>
+
+                
+                    <ul>
+                        <li><a> Necesita Playstation 5</a></li>
+                        <li><a >Resolucion por ojo: 2000x2040 120Hz</a></li>
+                        <li><a >FoV: 110°</a></li>
+                        <li><a >Tracking: 6 DoF</a></li>
+                        <li><a >Peso: 560 g</a></li>
+                    </ul>
+
+                <div class="precio">
+
+                    <h2 hidden>Playstation VR 2</h2>
+
+                    <h1>$1500000</h1>
+
+                    <button id="bt8" class="agregar-carrito" data-id="8"
+                    data-nombre="Playstation VR 2" data-precio="1500000">
+                    Agregar al Carrito</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <review id="servicios">
+        
+        <cards>
+            <p>
+                Sin palabras, 
+                la realidad virtual es increíble, 
+                llegue por recomendación de un amigo
+                hace tiempo atrás y me sorprendió la calidad.
+                Excelente atención y asesoramiento 
+                ¡los super recomiendo!
+	
+                <h3><strong>NADIA</strong></h3>
+            </p>
+        </cards>
+        <cards>
+            <p>
+                Muchísimas gracias PawnVR, 
+                estoy muy satisfecho con ustedes,
+                son realmente muy buenos, experiencia 
+                100% recomendable. 
+
+                <h3><strong>PABLO</strong></h3>
+            </p>
+        </cards>
+        <cards>
+            <p>
+                Quede 100% satisfecho, lo recomiendo, 
+                los lentes de realidad virtual 
+                que tienen son muy buena calidad, 
+                la experiencia es excelente, 
+                al visitar lugares, realmente parece 
+                que estas ahí. ¡Muy bueno!
+
+                <h3><strong>MARTIN</strong></h3>
+            </p>
+        </cards>
+
+    </review>
+    
+    <servicios>
+        
+        <div>
+            <h1><strong>No dudes en realizar tu consulta</strong></h1>
+            <h2>Gracias por ingresar a nuestra página web.</h2>
+        </div>
+
+        <form action="https://formspree.io/f/mblopybn" method="POST">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" cols="50" required></textarea>
+    
+            <button type="submit">Enviar</button>
+        </form>
+
+
+    </servicios>
+
+    
+
+    </main>
+
+    <footer id="contacto">
+
+        <contacto>
+            <a href="https://www.youtube.com/@ShooterPawnVR"><img src="image/pawnvr.png" alt="logo de yotube " width="100" height="100"></a>
+            <a href="https://www.youtube.com/@ShooterPawnVR"> &copy; ShooterPawnVR</a>
+        </contacto>
+
+        <seguinos>
+            <p><strong>Seguinos en redes:</strong></p>
+            <icons>
+
+                <a href="https://www.instagram.com/shooterpawn/"> <i class="fa-brands fa-instagram fa-2x"></i></a>
+                <a href="https://www.twitch.tv/shooterpawn"><i class="fa-brands fa-twitch fa-2x"></i></a>
+                <a href="https://www.youtube.com/@ShooterPawnVR"><i class="fa-brands fa-youtube fa-2x"></i></a>
+            
+            </icons>
+        </seguinos>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>

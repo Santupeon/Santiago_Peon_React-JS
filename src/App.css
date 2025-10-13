@@ -1,0 +1,230 @@
+/* App.css */
+
+/* -------------------- */
+/* --- GLOBAL STYLES -- */
+/* -------------------- */
+:root {
+  --primary-color: #ff5bf7;
+  --background-color: #2B1744;
+  --card-background: #ffffff;
+  --text-color-dark: #000000;
+  --text-color-light: #ffffff;
+  --shadow-color: rgb(221, 79, 243);
+}
+
+body {
+  font-family: "Orbitron", sans-serif;
+  background-color: var(--background-color);
+  background-image: url("/image/Background.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center 100px;
+  background-size: cover;
+  padding-top: 100px; /* To offset the fixed nav */
+  color: var(--text-color-light);
+}
+
+a {
+  font-weight: 500;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+a:hover {
+  filter: brightness(1.2);
+}
+
+h1, h2, h3 {
+  color: var(--primary-color);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+/* -------------------- */
+/* ------ LAYOUT ------ */
+/* -------------------- */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  background-color: var(--background-color);
+  height: 100px;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.main-content {
+  padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* -------------------- */
+/* --- PRODUCT LIST --- */
+/* -------------------- */
+.container-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.item {
+  background-color: var(--card-background);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all .5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item:hover {
+  box-shadow: 0 10px 20px var(--shadow-color);
+  transform: translateY(-10px);
+}
+
+.item figure {
+  margin: 0;
+  width: 100%;
+}
+
+.item img {
+  width: 100%;
+  height: 300px;
+  object-fit: scale-down;
+  display: block;
+}
+
+.info-product {
+  padding: 15px 30px;
+  width: 100%;
+  text-align: center;
+  color: var(--text-color-dark);
+}
+
+.info-product h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  min-height: 50px;
+  color: var(--text-color-dark);
+  text-shadow: none;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--background-color);
+  margin-bottom: 1rem;
+}
+
+.btn-add-cart {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  background-color: #888888;
+  border: 2px solid #000000;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  color: var(--text-color-dark);
+}
+.btn-add-cart:hover {
+  background-color: var(--primary-color);
+}
+
+/* -------------------- */
+/* -------- CART -------- */
+/* -------------------- */
+.cart-container {
+  background-color: #c0a1ff;
+  color: var(--text-color-dark);
+  padding: 1rem;
+  border-radius: 10px;
+  min-width: 300px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.20);
+}
+
+.cart-container h2 {
+  color: var(--text-color-dark);
+  text-shadow: none;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.20);
+}
+
+.remove-item-btn {
+  background: #9b0303;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 24px;
+  text-align: center;
+}
+
+.cart-total {
+  display: block;
+  text-align: right;
+  margin-top: 1rem;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* -------------------- */
+/* -- PRODUCT DETAIL -- */
+/* -------------------- */
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.product-detail img {
+  border-radius: 8px;
+  background-color: white;
+}
+
+.product-features ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Login/Logout Button */
+header button {
+  padding: 0.6em 1.2em;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  background-color: var(--primary-color);
+  border: 2px solid #000000;
+  cursor: pointer;
+  color: var(--text-color-dark);
+}
