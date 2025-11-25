@@ -10,9 +10,11 @@ const formatPrice = (price) => {
   }).format(price);
 };
 
-function ProductDetailPage({ products, onAddToCart }) {
+function ProductDetailPage({ products }) {
   const { productId } = useParams();
-  const product = products.find(p => p.id === parseInt(productId));
+  // Comparamos string con string. 
+  // El `productId` de la URL es un string, y el `p.id` de la API también es un string.
+  const product = products.find(p => p.id === productId);
 
   if (!product) {
     return (
@@ -34,7 +36,7 @@ function ProductDetailPage({ products, onAddToCart }) {
           {product.features.map((feature, index) => <li key={index}>{feature}</li>)}
         </ul>
       </div>
-      <button onClick={() => onAddToCart(product)} className="btn-add-cart">Añadir al carrito</button>
+      {/* El botón de añadir al carrito ya no necesita onAddToCart, lo obtiene del contexto */}
       <Link to="/products">Volver a Productos</Link>
     </div>
   );

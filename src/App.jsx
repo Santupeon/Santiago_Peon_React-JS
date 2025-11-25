@@ -1,100 +1,95 @@
-import { useState, useEffect } from 'react'
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import './App.css'
-import Cart from './components/Cart'
-import { products as mockProducts } from './data/products.js'; 
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ProtectedRoute from './ProtectedRoute';
 import CheckoutPage from './pages/CheckoutPage';
+import AddProductPage from './pages/AddProductPage';
+import EditProductPage from './pages/EditProductPage'; // 1. Importar la nueva página
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
+import { useAuth } from './context/AuthContext';
+import { useProducts } from './context/ProductContext';
+import CartWidget from './components/CartWidget';
 
 function App() {
-
-  const [cart, setCart] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-
-  useEffect(() => {
-    const fetchProducts = () => {
-      setLoading(true);
-      setError(null);
-      setTimeout(() => {
-        try {
-          setProducts(mockProducts);
-        } catch (err) {
-          setError('Failed to load products.');
-        } finally {
-          setLoading(false);
-        }
-      }, 1000);
-    };
-
-    fetchProducts();
-  }, []); 
-
-
-  const handleAddToCart = (product) => {
-    const existingProduct = cart.find(item => item.id === product.id);
-
-    if (existingProduct) {
-      setCart(cart.map(item => 
-        item.id === product.id 
-          ? { ...item, quantity: item.quantity + 1 } 
-          : item
-      ));
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
-  };
-
-
-  const handleRemoveFromCart = (productId) => {
-    setCart(cart.filter(item => item.id !== productId));
-  };
-
+  // El nuevo AuthContext nos da más información
+  const { user, isLoggedIn, isAdmin, logout } = useAuth();
+  // Los productos, el estado de carga y los errores ahora vienen del ProductContext
+  const { products, loading, error } = useProducts();
+  
   return (
     <>
       <header>
-        <Link to="/"><h1>Tienda</h1></Link>
+        <h1>Tienda VR</h1>
         <nav>
-          <Link to="/">Inicio</Link>
           <Link to="/products">Productos</Link>
-          <Link to="/checkout">Checkout</Link>
+          {isAdmin && <Link to="/admin/add-product">Añadir Producto</Link>}
+          {isLoggedIn && <Link to="/checkout">Checkout</Link>}
         </nav>
-        <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
-          {isLoggedIn ? 'Cerrar Sesión' : 'Iniciar Sesión'}
-        </button>
-        <Cart cartItems={cart} onRemoveFromCart={handleRemoveFromCart} />
+        <div className="auth-section">
+          {isLoggedIn ? (
+            <>
+              <span>Hola, {user.name}</span>
+              <button onClick={logout} className="btn-action">Cerrar Sesión</button>
+              <CartWidget />
+            </>
+          ) : (
+            <>
+              <Link to="/login">Iniciar Sesión</Link>
+              <Link to="/signup">Registrarse</Link>
+            </>
+          )}
+        </div>
       </header>
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Navigate to="/products" replace />} />
           <Route 
             path="/products" 
             element={
               loading ? <p>Loading products...</p> : 
               error ? <p style={{ color: 'red' }}>{error}</p> :
-              <ProductsPage products={products} onAddToCart={handleAddToCart} />
+              <ProductsPage products={products} />
             } 
           />
           <Route 
             path="/products/:productId"
             element={
-              <ProductDetailPage products={products} onAddToCart={handleAddToCart} />
+              <ProductDetailPage products={products} />
             }
           />
           <Route
             path="/checkout"
             element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <ProtectedRoute>
                 <CheckoutPage />
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/admin/add-product"
+            element={
+              <ProtectedRoute>
+                {isAdmin ? <AddProductPage /> : <Navigate to="/products" />}
+              </ProtectedRoute>
+            }
+          />
+          {/* 2. Añadir la nueva ruta de edición */}
+          <Route
+            path="/admin/edit-product/:productId"
+            element={
+              <ProtectedRoute>
+                {isAdmin ? <EditProductPage /> : <Navigate to="/products" />}
+              </ProtectedRoute>
+            }
+          />
+          {/* Si un usuario logueado intenta ir a /login o /signup, lo redirigimos al inicio */}
+          <Route path="/login" element={isLoggedIn ? <Navigate to="/products" replace /> : <LoginPage />} />
+          <Route path="/signup" element={isLoggedIn ? <Navigate to="/products" replace /> : <SignUpPage />} />
+          {/* Ruta para cualquier otra URL no encontrada */}
+          <Route path="*" element={<Navigate to={isLoggedIn ? "/products" : "/login"} replace />} />
         </Routes>
       </main>
     </>
