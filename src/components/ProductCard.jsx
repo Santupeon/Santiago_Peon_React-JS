@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { formatPrice } from '../utils/formatters'; 
+import { formatPrice } from '../utils/formatters';
 import { useCart } from '../context/CartContext.jsx';
+import { toast } from 'react-toastify'; 
+import { FaEdit, FaTrash, FaCartPlus } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useProducts } from '../context/ProductContext.jsx';
 
-// 1. Creamos nuestros componentes de estilo
+
 const CardWrapper = styled.div`
   background-color: #fff;
   border-radius: 8px;
@@ -28,7 +30,7 @@ const CardImage = styled.img`
   height: 200px;
   object-fit: contain; /* Cambiamos de 'cover' a 'contain' */
   background-color: #f8f9fa; /* Añadimos un fondo claro para que no se vea vacío */
-  padding: 0.5rem; /* Un poco de espacio interior */
+  padding: 0.5rem;
 `;
 
 const CardBody = styled.div`
@@ -42,14 +44,8 @@ const CardTitle = styled.h2`
   font-size: 1.25rem;
   color: #212529; /* Un negro suave, mucho más legible */
   margin-bottom: 0.5rem;
-  text-shadow: none; /* Eliminamos cualquier sombra de texto heredada */
-
-  /* --- Estilos para truncar el texto y mantener la altura --- */
-  
-  /* Establecemos una altura mínima para el título (aprox. 2 líneas) */
-  min-height: 3em; 
-  
-  /* Propiedades para cortar el texto después de 2 líneas y añadir "..." */
+  text-shadow: none;
+  min-height: 3em;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -68,6 +64,9 @@ const AdminActions = styled.div`
   display: flex;
   gap: 0.5rem;
   margin-top: 0.5rem;
+  button {
+    flex: 1;
+  }
 `;
 
 const AddToCartButton = styled.button`
@@ -77,6 +76,10 @@ const AddToCartButton = styled.button`
   width: 100%;
   padding: 10px;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   font-family: "Orbitron", sans-serif;
   font-weight: 700;
   background-color: #888888;
@@ -93,7 +96,33 @@ const AddToCartButton = styled.button`
 function ProductCard({ product }) {
   const { addToCart } = useCart();
   const { isAdmin } = useAuth();
-  const { deleteProduct } = useProducts(); // Obtenemos la función para eliminar
+  const { deleteProduct } = useProducts(); 
+  const navigate = useNavigate();
+  
+  const ConfirmToast = ({ closeToast, productId, productName }) => (
+    <div>
+      <p>¿Estás seguro de que quieres eliminar "{productName}"?</p>
+      <button
+        onClick={() => {
+          toast.promise(
+            deleteProduct(productId),
+            {
+              pending: `Eliminando "${productName}"...`,
+              success: `¡"${productName}" eliminado con éxito!`,
+              error: `Error al eliminar "${productName}".`
+            }
+          );
+          closeToast();
+        }}
+        style={{ marginRight: '10px' }}
+      >
+        Sí, eliminar
+      </button>
+      <button onClick={closeToast}>
+        No
+      </button>
+    </div>
+  );
 
   return (
     <Link to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
@@ -102,24 +131,36 @@ function ProductCard({ product }) {
         <CardBody>
           <CardTitle>{product.name}</CardTitle>
           <CardPrice>{formatPrice(product.price)}</CardPrice>
-          <AddToCartButton onClick={(e) => { e.preventDefault(); addToCart(product); }}>Añadir al carrito</AddToCartButton>
-          {/* Re-introducimos los botones de administrador */}
+          <AddToCartButton onClick={(e) => { e.preventDefault(); addToCart(product); }}>
+            <FaCartPlus /> Añadir al carrito
+          </AddToCartButton>
           {isAdmin && (
             <AdminActions>
-              <Link to={`/admin/edit-product/${product.id}`} onClick={(e) => e.stopPropagation()}>
-                <button>Editar</button>
-              </Link>
+              <button onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                navigate(`/admin/edit-product/${product.id}`);
+              }}>
+                <FaEdit /> Editar
+              </button>
               <button
                 onClick={(e) => {
-                  e.preventDefault(); // Prevenimos la navegación
-                  e.stopPropagation(); // Detenemos la propagación del clic
-                  if (window.confirm(`¿Estás seguro de que quieres eliminar "${product.name}"?`)) {
-                    deleteProduct(product.id);
-                  }
+                  e.preventDefault(); 
+                  e.stopPropagation(); 
+                  toast(
+                    ({ closeToast }) => (
+                      <ConfirmToast
+                        closeToast={closeToast}
+                        productId={product.id}
+                        productName={product.name}
+                      />
+                    ),
+                    { autoClose: false, closeOnClick: false } 
+                  );
                 }}
                 style={{ backgroundColor: '#9b0303', color: 'white' }}
               >
-                Eliminar
+                <FaTrash /> Eliminar
               </button>
             </AdminActions>
           )}

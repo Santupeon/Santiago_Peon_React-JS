@@ -1,7 +1,3 @@
-/* App.css */
-
-/* -------------------- */
-
 :root {
   --primary-color: #ff5bf7;
   --background-color: #2B1744;
@@ -17,10 +13,11 @@ body {
   background-image: url("/image/Background.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center 100px;
+  background-position: center 60px;
   background-size: cover;
   padding-top: 100px; 
   color: var(--text-color-light);
+
 }
 
 a {
@@ -28,7 +25,6 @@ a {
   color: var(--primary-color);
   text-decoration: none;
 }
-
 
 header nav a, .auth-section a {
   color: var(--text-color-light); 
@@ -41,7 +37,6 @@ header nav a:hover, .auth-section a:hover {
   color: var(--primary-color); 
   text-decoration: none;
 }
-
 
 .main-content h2 {
   color: hsl(280, 14%, 28%); 
@@ -57,8 +52,6 @@ header nav a:hover, .auth-section a:hover {
   text-align: center;
 }
 
-/* -------------------- */
-
 header {
   position: fixed;
   top: 0;
@@ -66,23 +59,13 @@ header {
   right: 0;
   z-index: 1000;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 2rem;
   background-color: var(--background-color);
-   min-height: 100px;
+  min-height: 100px;
   flex-wrap: wrap;
   gap: 1rem;
-}
-
-header h1 {
-  font-family: "Orbitron", sans-serif;
-  font-weight: 700;
-  color: #d8d8d8;  
-  text-align: center; 
-  margin-bottom: 1.5rem; 
-  font-size: 2rem;
-  margin: 0;
 }
 
 header nav {
@@ -98,9 +81,12 @@ header nav {
   gap: 1rem; 
 }
 
-.cart-widget span {
-  color: #d8d8d8; 
-  font-weight: 700;
+.cart-widget {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--text-color-light); 
 }
 
 .main-content {
@@ -108,9 +94,6 @@ header nav {
   max-width: 1280px;
   margin: 0 auto;
 }
-
-/* -------------------- */
-
 .container-items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -144,13 +127,6 @@ header nav {
   display: block;
 }
 
-.info-product {
-  padding: 15px 30px;
-  width: 100%;
-  text-align: center;
-  color: var(--text-color-dark);
-}
-
 .info-product h2 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
@@ -182,8 +158,6 @@ header nav {
   background-color: var(--primary-color);
 }
 
-/* -------------------- */
-
 .cart-container {
   background-color: #f8f9fa;
   color: var(--text-color-dark);
@@ -194,8 +168,6 @@ header nav {
   margin: 0 auto;
   box-shadow: 0 10px 20px rgba(0,0,0,0.20);
 }
-
-
 .cart-item {
   display: flex;
   justify-content: space-between;
@@ -253,6 +225,9 @@ header nav {
 
 .product-detail img {
   border-radius: 8px;
+  max-width: 100%;
+  max-width: 400px; 
+  height: auto;
   background-color: #d8d8d8;
 }
 
@@ -271,4 +246,45 @@ header nav {
   border: 2px solid #000000;
   cursor: pointer;
   color: var(--text-color-dark);
+  white-space: nowrap;
+}
+
+/* --- Media Query para pantallas pequeñas (móviles) --- */
+
+@media (max-width: 768px) {
+  header {
+    justify-content: center; 
+    padding: 1rem; 
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  header nav, .auth-section {
+    flex-basis: auto;
+    justify-content: center;
+  }
+}
+
+/* --- Media Query para pantallas en modo horizontal (landscape) y poca altura --- */
+
+@media (orientation: landscape) and (max-height: 500px) {
+  header {
+    width: 100%;
+    justify-content: center;
+    min-height: auto; 
+    padding: 0.5rem 1rem; 
+  }
+
+  header nav {
+    font-size: 0.9rem;
+  }
+
+  body {
+    padding-top: 0;
+  }
 }

@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importación de Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from './context/CartContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { ProductProvider } from './context/ProductContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <HelmetProvider>
     <BrowserRouter>
       <AuthProvider>
         <ProductProvider>
@@ -19,5 +21,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </ProductProvider>
       </AuthProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </HelmetProvider>
 )

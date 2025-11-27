@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 import { useProducts } from '../context/ProductContext';
 
 const FormWrapper = styled.div`
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #f8f9fa; /* Un gris claro */
+  background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #333; /* Texto oscuro para el contenido de la caja */
+  color: #333;
   text-align: center;
 
   h2 {
@@ -54,7 +55,6 @@ const AddProductPage = () => {
     if (!formData.price || parseFloat(formData.price) <= 0) {
       newErrors.price = 'El precio debe ser un número mayor a 0.';
     }
-    // Para las características (features), las tomaremos como un texto separado por comas.
     if (!formData.features) {
       newErrors.features = 'Añade al menos una característica.';
     }
@@ -72,20 +72,19 @@ const AddProductPage = () => {
     setErrors({});
     setIsSubmitting(true);
 
-    // Preparamos el producto para enviarlo a la API
     const newProduct = {
       name: formData.name,
-      price: formData.price, // El contexto se encargará de convertirlo
-      image: formData.image || 'https://via.placeholder.com/300', // Imagen por defecto
-      features: formData.features.split(',').map(feature => feature.trim()), // Convertimos el string a un array
+      price: formData.price,
+      image: formData.image || 'https://via.placeholder.com/300', 
+      features: formData.features.split(',').map(feature => feature.trim()), 
     };
 
     try {
       await addProduct(newProduct);
-      alert('¡Producto añadido con éxito!');
-      navigate('/products'); // Redirigimos a la lista de productos
+      toast.success('¡Producto añadido con éxito!');
+      navigate('/products'); 
     } catch (error) {
-      alert('Error al añadir el producto. Inténtalo de nuevo.');
+      toast.error('Error al añadir el producto. Inténtalo de nuevo.');
     } finally {
       setIsSubmitting(false);
     }

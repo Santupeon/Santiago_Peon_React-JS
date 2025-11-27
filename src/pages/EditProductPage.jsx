@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 import { useProducts } from '../context/ProductContext';
 
 const FormWrapper = styled.div`
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #f8f9fa; /* Un gris claro */
+  background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #333; /* Texto oscuro para el contenido de la caja */
+  color: #333;
   text-align: center;
 
   h2 {
@@ -29,7 +30,7 @@ const FormWrapper = styled.div`
 
 const EditProductPage = () => {
   const { products, updateProduct } = useProducts();
-  const { productId } = useParams(); // Obtenemos el ID del producto de la URL
+  const { productId } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -43,7 +44,6 @@ const EditProductPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Este useEffect se encarga de encontrar el producto y llenar el formulario
   useEffect(() => {
     const productToEdit = products.find(p => p.id === productId);
     if (productToEdit) {
@@ -51,11 +51,10 @@ const EditProductPage = () => {
         name: productToEdit.name,
         price: productToEdit.price.toString(),
         image: productToEdit.image,
-        features: productToEdit.features.join(', '), // Convertimos el array a un string para el textarea
+        features: productToEdit.features.join(', '), 
       });
       setLoading(false);
     } else if (products.length > 0) {
-      // Si los productos ya cargaron pero no encontramos este, redirigimos
       navigate('/products');
     }
   }, [products, productId, navigate]);
@@ -93,10 +92,10 @@ const EditProductPage = () => {
 
     try {
       await updateProduct(productId, updatedProduct);
-      alert('¡Producto actualizado con éxito!');
+      toast.success('¡Producto actualizado con éxito!');
       navigate('/products');
     } catch (error) {
-      alert('Error al actualizar el producto. Inténtalo de nuevo.');
+      toast.error('Error al actualizar el producto. Inténtalo de nuevo.');
     } finally {
       setIsSubmitting(false);
     }

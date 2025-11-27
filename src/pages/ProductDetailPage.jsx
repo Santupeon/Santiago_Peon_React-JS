@@ -1,5 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { useProducts } from '../context/ProductContext';
 
 
 const formatPrice = (price) => {
@@ -10,35 +12,51 @@ const formatPrice = (price) => {
   }).format(price);
 };
 
-function ProductDetailPage({ products }) {
+function ProductDetailPage() {
   const { productId } = useParams();
-  // Comparamos string con string. 
-  // El `productId` de la URL es un string, y el `p.id` de la API también es un string.
-  const product = products.find(p => p.id === productId);
+  const { products, loading } = useProducts();
+
+  // Calculamos el producto en cada renderizado
+  const product = !loading ? products.find(p => p.id === productId) : null;
+
+  if (loading) {
+    return (
+      <p>Cargando producto...</p>
+    );
+  }
 
   if (!product) {
     return (
-      <div>
-        <h2>Producto no encontrado</h2>
-        <Link to="/products">Volver a Productos</Link>
-      </div>
+      <>
+        <Helmet>
+          <title>Producto no encontrado - Tienda VR</title>
+        </Helmet>
+        <div>
+          <h2>Producto no encontrado</h2>
+          <Link to="/products">Volver a Productos</Link>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="product-detail">
-      <h1>{product.name}</h1>
-      <img src={product.image} alt={product.name} style={{ maxWidth: '400px' }} />
-      <p className="price">{formatPrice(product.price)}</p>
-      <div className="product-features">
-        <h3>Características:</h3>
-        <ul>
-          {product.features.map((feature, index) => <li key={index}>{feature}</li>)}
-        </ul>
+    <>
+      <Helmet>
+        <title>{`${product.name} - Tienda VR`}</title>
+      </Helmet>
+      <div className="product-detail">
+        <h1>{product.name}</h1>
+        <img src={product.image} alt={product.name} />
+        <p className="price">{formatPrice(product.price)}</p>
+        <div className="product-features">
+          <h3>Características:</h3>
+          <ul>
+            {product.features.map((feature, index) => <li key={index}>{feature}</li>)}
+          </ul>
+        </div>
+        <Link to="/products">Volver a Productos</Link>
       </div>
-      {/* El botón de añadir al carrito ya no necesita onAddToCart, lo obtiene del contexto */}
-      <Link to="/products">Volver a Productos</Link>
-    </div>
+    </>
   );
 }
 

@@ -1,16 +1,18 @@
 import React from 'react';
-import { useCart } from '../context/CartContext'; // Importamos el hook para usar el contexto del carrito
+import { Link } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
+import { useCart } from '../context/CartContext';
 
 const CartWidget = () => {
-  const { cart } = useCart(); // Obtenemos el estado del carrito
-
-  // Calculamos la cantidad total de ítems en el carrito
+  const { cart } = useCart();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="cart-widget">
-      🛒 {totalItems > 0 && <span>({totalItems})</span>}
-    </div>
+    <Link to="/checkout" className="cart-widget">
+      <>
+        <FaShoppingCart /> {totalItems > 0 && <span>({totalItems})</span>}
+      </>
+    </Link>
   );
 };
 
